@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import {Card, CardText, CardTitle,CardSubtitle,CardImg, CardBody} from 'reactstrap';
+import {Card, CardText, CardTitle,CardSubtitle,CardImg, CardBody,BreadcrumbItem, Breadcrumb} from 'reactstrap';
 function RenderCard({item}){
     return(
       <Card>
@@ -16,14 +16,23 @@ function RenderCard({item}){
 function Home(props){
   return(
     <div className='container'>
+      <div className='row'>
+          <Breadcrumb>
+            <BreadcrumbItem active>Home</BreadcrumbItem>
+          </Breadcrumb>
+          <div className='col-12'>
+            <h3>Home</h3>
+            <hr />
+          </div>   
+         </div>
       <div className='row align-items-start'>
-        l<div className='col-12 col-md m-1'>
+        <div className='col-12 col-md m-1'>
           <RenderCard item={props.dish} />
         </div>
-        l<div className='col-12 col-md m-1'>
+        <div className='col-12 col-md m-1'>
           <RenderCard item={props.promotion} />
         </div>
-        l<div className='col-12 col-md m-1'>
+        <div className='col-12 col-md m-1'>
           <RenderCard item={props.leader} />
         </div>
       </div>

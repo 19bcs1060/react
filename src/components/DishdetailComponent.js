@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import {Card,CardTitle,CardImg,CardImgOverlay, CardText, CardBody} from 'reactstrap';
-
-function RenderDish({dish1}){
+import {Card,CardTitle,CardImg,CardImgOverlay, CardText, CardBody, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
+function RenderDish({dish}){
     return(
     <Card>
-      <CardImg top src={dish1.image} alt={dish1.name} />
+      <CardImg top src={dish.image} alt={dish.name} />
       <CardBody>
-        <CardTitle>{dish1.name}</CardTitle>
-        <CardText>{dish1.description}</CardText>
+        <CardTitle>{dish.name}</CardTitle>
+        <CardText>{dish.description}</CardText>
       </CardBody>
     </Card>
   );
   }
-function RenderComments({dish1}){
+function RenderComments({comment}){
     return(
-      dish1.comments.map((com)=>{
+      comment.map((com)=>{
           return(
               <CardBody>
                 <CardText>{com.comment}</CardText>
@@ -25,21 +25,28 @@ function RenderComments({dish1}){
 );
 }
 const Details=(props)=>{
-    const dish1= props.dish;
-
-  if(dish1!=null){
+  if(props.dish!=null){
     return(
       <div className='container'>
         <div className='row'>
-        <div className="col-12 col-md-5 m-1">
-          <RenderDish dish1={dish1} />
-        </div>
-        <div className="col-12 col-md-5 m-1">
-          <Card>
-            <h3>Comments</h3>
-            <RenderComments dish1={dish1} />
-          </Card>
-        </div>
+          <Breadcrumb>
+            <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+          </Breadcrumb>
+          <div className='col-12'>
+            <h3>{props.dish.name}</h3>
+            <hr />
+          </div>
+          <div className="col-12 col-md-5 m-1">
+            <RenderDish dish={props.dish} />
+          </div>
+          <div className="col-12 col-md-5 m-1">
+            <Card>
+              <h3>Comments</h3>
+              <RenderComments comment={props.comments} />
+            </Card>
+          </div>
         </div>
       </div>
     );}
